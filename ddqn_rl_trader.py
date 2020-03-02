@@ -1,9 +1,13 @@
 import numpy as np
 
 # import keras
-from keras.models import Sequential
-from keras.layers import Dense, Activation, Flatten, CuDNNLSTM
-from keras.optimizers import Adam
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Activation, Flatten,LSTM
+from tensorflow.keras.optimizers import Adam
+
+from tensorflow.python.framework.ops import disable_eager_execution
+
+
 
 # keras-rl agent
 from rl.agents.dqn import DQNAgent
@@ -15,13 +19,17 @@ from TraderEnv import OhlcvEnv
 # custom normalizer
 from util import NormalizerProcessor
 
+#disable the eager execution , add by ljqu 2020.3.2
+disable_eager_execution()
+
 def create_model(shape, nb_actions):
     model = Sequential()
-    model.add(CuDNNLSTM(64, input_shape=shape, return_sequences=True))
-    model.add(CuDNNLSTM(64))
+    model.add(LSTM(64, input_shape=shape, return_sequences=True))
+    model.add(LSTM(64))
     model.add(Dense(32))
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))
+    return model
 
 def main():
     # OPTIONS
@@ -40,7 +48,8 @@ def main():
 
     nb_actions = env.action_space.n
     model = create_model(shape=env.shape, nb_actions=nb_actions)
-    print(model.summary())
+    #print(model.summary())
+    model.summary()
 
     # Finally, we configure and compile our agent. You can use every built-in Keras optimizer and even the metrics!
     memory = SequentialMemory(limit=50000, window_length=TIME_STEP)
