@@ -109,8 +109,8 @@ while True:
 ## simply plug in any keras model :)
 def create_model(shape, nb_actions):
     model = Sequential()
-    model.add(CuDNNLSTM(64, input_shape=shape, return_sequences=True))
-    model.add(CuDNNLSTM(64))
+    model.add(LSTM(64, input_shape=shape, return_sequences=True))
+    model.add(LSTM(64))
     model.add(Dense(32))
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))
