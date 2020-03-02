@@ -3,7 +3,7 @@
 This repo contains 
 1. Trading environment(OpenAI Gym) for trading crypto currency  
 2. Duel Deep Q Network  
-Agent is implemented using `keras-rl`(https://github.com/keras-rl/keras-rl)     
+Agent is implemented using `keras-rl2`(https://github.com/wau/keras-rl2)
   
 Agent is expected to learn useful action sequences to maximize profit in a given environment.  
 Environment limits agent to either buy, sell, hold stock(coin) at each step.  
@@ -144,6 +144,7 @@ Wow ! 29 fold return, 3.67 reward !
 ## Authors
 
 * **Lee Hankyol** - *Initial work* - [deep_rl_trader](https://github.com/miroblog/deep_rl_trader)
+* **Watch Sea**   - *Upgrade work*  upgrade tensorflow 1.10 to tensorflow 2.1.0
 
 ## License
 
